@@ -37,7 +37,7 @@ codegen-units = 1 # Reduce codegen units to improve optimizations
 opt-level = "s"
 
 [dependencies]
-prettytable-rs = { version = "^0.10", optional = true }
+prettytable-rs = { version = "^0.10", optional = true, features = ["csv"] }
 serde_json = { version = "1.0", optional = true }
 serde_yaml = { version = "0.9", optional = true }
 serde = { version = "1.0", features = ["derive"], optional = true }
