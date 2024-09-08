@@ -6,6 +6,7 @@
 //! ```rust
 //! use m_bus_parser::frames::{ Address, Frame, Function };
 //! use m_bus_parser::user_data::{ DataRecords, UserDataBlock };
+//! use m_bus_parser::MbusData;
 //! use std::io;
 //!
 //!     let example = vec![
@@ -46,26 +47,9 @@
 use frames::FrameError;
 use user_data::ApplicationLayerError;
 
-#[cfg(feature = "std")]
-use prettytable::{csv::Writer, format, row, Table};
-
-#[cfg(feature = "std")]
-use std::str;
-
 pub mod frames;
+pub mod mbus_data;
 pub mod user_data;
-
-#[derive(Debug)]
-#[cfg_attr(
-    feature = "serde",
-    derive(serde::Serialize),
-    serde(bound(deserialize = "'de: 'a"))
-)]
-pub struct MbusData<'a> {
-    pub frame: frames::Frame<'a>,
-    pub user_data: Option<user_data::UserDataBlock<'a>>,
-    pub data_records: Option<user_data::DataRecords<'a>>,
-}
 
 #[derive(Debug)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
